@@ -1,7 +1,7 @@
 # Rosegarden
 
 Rosegarden gives you the promises for writing cross platform
-webextensions on Chrome and other browsers missing the promise based
+web extensions on Chrome and other browsers missing the promise based
 API.
 
 ## Rationale
@@ -24,8 +24,8 @@ using other APIs, in case they differ between Firefox and Chrome.
 Then just use that browser object as you would use the Mozilla's
 promise based WebExtension API!
 
-It just gives the global object on Firefox, but on Chrome it gives a
-promisified version of the chrome global object. The browser object
+It just gives the global browser object on Firefox, but on Chrome it gives a
+promisified version of the chrome global object as browser. The browser object
 has chrome as prototype, so everything should work as expected as long
 as the APIs work in a similar way.
 

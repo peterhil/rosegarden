@@ -1,0 +1,35 @@
+{
+    "name": "rosegarden",
+    "version": "0.5.0",
+    "description": "Rosegarden gives you the promises for writing cross platform webextensions on Chrome and other browsers missing the promise based API",
+    "main": "src/rosegarden.js",
+    "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
+    "license": "MPL-2.0",
+    "type": "module",
+    "scripts": {
+        "build": "rm -rf dist/* && rollup -c",
+        "dev": "rm -rf dev/* && rollup -cw",
+        "lint": "pnpm run lint:js",
+        "lint:js": "eslint *.js src/**/*.js test/**/*.js",
+        "test": "mocha test",
+        "version": "echo $npm_package_version"
+    },
+    "dependencies": {
+        "rambda": "^6.7.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.3",
+        "@babel/eslint-parser": "^7.14.4",
+        "@rollup/plugin-commonjs": "^19.0.0",
+        "@rollup/plugin-eslint": "^8.0.1",
+        "@rollup/plugin-node-resolve": "^13.0.0",
+        "eslint": "^7.28.0",
+        "eslint-config-standard": "^16.0.3",
+        "eslint-plugin-import": "^2.23.4",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^5.1.0",
+        "mocha": "^9.0.0",
+        "rollup": "^2.51.1",
+        "rollup-plugin-terser": "^7.0.2"
+    }
+}

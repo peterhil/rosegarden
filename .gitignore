@@ -1,0 +1,15 @@
+dev/
+dist/
+node_modules/
+
+# Environment
+.envrc
+.direnv/
+
+# Mac
+.DS_Store
+
+# Temp files
+*~
+.#*
+**/#*#

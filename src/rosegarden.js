@@ -8,7 +8,7 @@
 
 import { compose, curry } from 'rambda'
 
-import { callbackToPromise, withErrorChecking } from './helpers'
+import { callbackToPromise, isCallback, withErrorChecking } from './helpers'
 
 if (globalThis.chrome && !globalThis.browser) {
     const chrome = globalThis.chrome
@@ -26,7 +26,7 @@ export const browser = globalThis.browser
 /**
  * Promisify a callback based chrome API
  */
-export function promised (object) {
+export function promised (object, prefix='chrome', verbose=false) {
     const promises = {}
 
     for (const property in object) {
@@ -35,11 +35,18 @@ export function promised (object) {
 
         switch (kind) {
         case 'function':
-            promises[property] = toPromise(thing)
+            if (!isCallback(thing, prefix, property, verbose)) {
+                promises[property] = thing
+            } else {
+                promises[property] = toPromise(thing)
+            }
             break
         case 'object':
-            if (property.slice(0, 2) === 'on') continue
-            promises[property] = promised(thing)
+            if (property.slice(0, 2) === 'on') {
+                promises[property] = thing
+            } else {
+                promises[property] = promised(thing, [prefix, property].join('.'))
+            }
             break
         }
     }

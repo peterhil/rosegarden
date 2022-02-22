@@ -23,6 +23,26 @@ export function callbackToPromise (fn) {
     return promised
 }
 
+export function isCallback (thing, prefix, property, verbose=false) {
+    try {
+        thing(console.error, 777)  // invalid call
+        verbose && console.log('non-callback function:', thing.length, prefix, property)
+    } catch (err) {
+        if (err instanceof TypeError) {
+            if (test(/callback/, err.message)) {
+                verbose && console.debug('callback:', thing.length, prefix, property)
+                return true
+            } else {
+                verbose && console.log('non-callback signature:', thing.length, prefix, property, err.message.split(':')[0].slice(23))
+            }
+        } else {
+            throw err
+        }
+    }
+
+    return false
+}
+
 export function withErrorChecking (chromeAsyncFn) {
     return function wrappedAsyncChromeFn (...args) {
         const originalCallback = last(args)

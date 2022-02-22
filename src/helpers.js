@@ -6,7 +6,11 @@
 
 /* global chrome */
 
-import { init, last, test } from 'rambda'
+import { includes, init, last, test } from 'rambda'
+
+const exceptions = [
+    'chrome.search', // opera: opens the default search engine
+]
 
 export function callbackToPromise (fn) {
     const promised = (...args) => {
@@ -24,8 +28,15 @@ export function callbackToPromise (fn) {
 }
 
 export function isCallback (thing, prefix, property, verbose=false) {
+    const fnPath = [prefix, property].join('.')
+    let result = false
+
     try {
-        thing(console.error, 777)  // invalid call
+        if (includes(fnPath, exceptions)) {
+            result = false
+        } else {
+            thing(console.error, 777)  // invalid call
+        }
         verbose && console.log('non-callback function:', thing.length, prefix, property)
     } catch (err) {
         if (err instanceof TypeError) {

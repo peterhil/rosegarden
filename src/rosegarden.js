@@ -26,7 +26,7 @@ export const browser = globalThis.browser
 /**
  * Promisify a callback based chrome API
  */
-export function promised (object, prefix='chrome', verbose=true) {
+export function promised (object, prefix='chrome', verbose=false) {
     const promises = {}
 
     for (const property in object) {

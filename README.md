@@ -4,6 +4,11 @@ Rosegarden gives you the promises for writing cross platform
 web extensions on Chrome and other browsers missing the promise based
 API.
 
+## Archive note
+
+This repository is archived, because the new promisified Chrome 
+webextension manifest V3 APIs do not work well with this library.
+
 ## Rationale
 
 I know Mozilla provides [webextension-polyfill], but I find even that
